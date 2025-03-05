@@ -1,60 +1,3 @@
-<?php
-session_start();
-$login_message = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $db_password = "";
-    $dbname = "safety_management";
-
-    $conn = new mysqli($servername, $username, $db_password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Database connection failed. Please try again later.");
-    }
-
-    // Query the users table (removing 'id' since it's not needed)
-    $sql = "SELECT email, password, is_registered FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 0) {
-        // Case 1: Email does not exist
-        $login_message = "<div class='alert alert-danger'>You are not an employee.</div>";
-    } else {
-        $row = $result->fetch_assoc();
-        
-        if ($row['is_registered'] == 0) {
-            // Case 2: Email exists but user is not registered
-            $login_message = "<div class='alert alert-warning'>
-                                You are an employee but not registered. 
-                                <a href='register.php'>Click here to register</a>.
-                              </div>";
-        } else {
-            // Case 3: Email exists and user is registered
-            if (password_verify($password, $row['password'])) {
-                $_SESSION['email'] = $row['email'];  
-
-                header("Location: staff-dashboard.php");
-                exit();
-            } else {
-                $login_message = "<div class='alert alert-danger'>Incorrect password.</div>";
-            }
-        }
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.php" class="logo d-flex align-items-center w-auto">
                                     <img src="assets/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">Employee Login</span>
+                                    <span class="d-none d-lg-block">Admin Login</span>
                                 </a>
                             </div><!-- End Logo -->
 
@@ -116,20 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                         <p class="text-center small d-none">Enter your username & password to login</p>
                                     </div>
-                                    <?php if (!empty($login_message)): ?>
-                                    <div class="alert alert-danger">
-                                        <?php echo $login_message; ?>
-                                    </div>
-                                    <?php endif; ?>
-                                    <form class="row g-3 needs-validation" method="POST" novalidate>
+
+                                    <form class="row g-3 needs-validation" novalidate>
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Email or Staff ID</label>
+                                            <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="username" class="form-control"
                                                     id="yourUsername" required>
-                                                <div class="invalid-feedback">Please enter your email or Staff ID</div>
+                                                <div class="invalid-feedback">Please enter your email.</div>
                                             </div>
                                         </div>
 
