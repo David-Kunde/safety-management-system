@@ -54,45 +54,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Register</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<main>
-    <div class="container">
-        <section class="register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="card p-4">
-                    <h5 class="text-center">Create an Account</h5>
-                    <?php if (!empty($registration_message)): ?>
+    <main>
+        <div class="container">
+            <section class="register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card p-4">
+                        <h5 class="text-center">Create an Account</h5>
+                        <?php if (!empty($registration_message)): ?>
                         <div class="alert <?php echo $registration_success ? 'alert-success' : 'alert-danger'; ?>">
                             <?php echo $registration_message; ?>
                         </div>
-                    <?php endif; ?>
-                    <form method="POST" action="" novalidate>
-                        <div class="mb-3">
-                            <label class="form-label">Your Work Email</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <input class="form-check-input" type="checkbox" required>
-                            <label class="form-check-label">I agree to the terms and conditions</label>
-                        </div>
-                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                        <p class="small mt-2">Already have an account? <a href="login.php">Log in</a></p>
-                    </form>
+                        <?php endif; ?>
+                        <form method="POST" action="" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label">Your Work Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-check-input" type="checkbox" required>
+                                <label class="form-check-label">I agree to the terms and conditions</label>
+                            </div>
+                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                            <p class="small mt-2">Already have an account? <a href="login.php">Log in</a></p>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
-</main>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            </section>
+        </div>
+    </main>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

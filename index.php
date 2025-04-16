@@ -127,9 +127,8 @@
         <p>Your safety, well-being, and compliance in the workplace.</p>
 
         <div class="mt-4">
-            <a href="incident-report.php" class="btn btn-danger btn-lg btn-custom">Report Incident</a>
-            <a href="login.php?role=employee" class="btn btn-secondary btn-lg btn-custom">Login as Employee</a>
-            <a href="login-admin.php?role=admin" class="btn btn-primary btn-lg btn-custom">Login as Admin</a>
+            <a href="login.php?role=admin" class="btn btn-primary btn-lg btn-custom px-5">Login</a>
+            <a href="incident-report.php" class="btn btn-danger btn-lg btn-custom px-3">Report Incident</a>
 
         </div>
     </div>

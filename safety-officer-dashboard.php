@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["profile_picture"])) {
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
@@ -327,10 +327,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["profile_picture"])) {
                                     <button class="nav-link active" data-bs-toggle="tab"
                                         data-bs-target="#profile-overview">Overview</button>
                                 </li>
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#my-violations">My
-                                        Violations</button>
-                                </li>
                             </ul>
 
                             <div class="tab-content pt-2">
@@ -380,104 +376,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["profile_picture"])) {
                                             <?php echo htmlspecialchars($user['email'] ?? ''); ?></div>
                                     </div>
                                 </div>
-                                <!-- My Violations Section -->
-                                <div class="tab-pane fade" id="my-violations">
-                                    <h5 class="card-title text-center">My Violations</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Violation Title</th>
-                                                    <th scope="col">Date Reported</th>
-                                                    <th scope="col">Severity</th>
-                                                    <th scope="col">Fine (Amount Deducted)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Example row -->
-                                                <tr>
-                                                    <td>Dangerous Horse Play</td>
-                                                    <td>2025-03-12</td>
-                                                    <td>Low</td>
-                                                    <td>₦3,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Absentism in safety drill</td>
-                                                    <td>2025-01-14</td>
-                                                    <td>Low</td>
-                                                    <td>₦5,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Moving unde a working crane</td>
-                                                    <td>2024-03-21</td>
-                                                    <td>High</td>
-                                                    <td>₦10,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Example Violation</td>
-                                                    <td>2023-10-01</td>
-                                                    <td>Medium</td>
-                                                    <td>₦5,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Non use of PPe</td>
-                                                    <td>2023-03-01</td>
-                                                    <td>low</td>
-                                                    <td>₦3,000</td>
-                                                </tr>
-                                                <!-- Add more rows as needed -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                                <!-- End My Violations Section -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="text-center mt-4">
-            <a href="incident-report.php" class="btn btn-danger">Report an Incident</a>
-        </div>
+
+        <!-- New Tab Button for "My Violations" -->
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#my-violations">My Violations</button>
+        </li>
+
+        <!-- New Tab Content for "My Violations" -->
+        <div class="tab-pane fade" id="my-violations">
+            <h5 class="card-title text-center mb-4">My Violations</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Violation Title</th>
+                            <th scope="col">Date Reported</th>
+                            <th scope="col">Severity</th>
+                            <th scope="col">Fine (Amount Deducted)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example Static Data -->
+                        <tr>
+                            <td>Safety Drill Missed</td>
+                            <td>2023-10-01</td>
+                            <td><span class="badge bg-danger">High</span></td>
+                            <td class="text-danger">$100</td>
+                        </tr>
+                        <tr>
+                            <td>Improper PPE Usage</td>
+                            <td>2023-09-25</td>
+                            <td><span class="badge bg-warning
+
+
+
+
+
+
+
+
+
     </div>
 
     <!-- Change Photo Modal -->
-    <div class="modal fade" id="changePhotoModal" tabindex="-1" aria-labelledby="changePhotoModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changePhotoModalLabel">Change Profile Photo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="profile_picture" class="form-label">Select Profile Photo</label>
-                            <input type="file" class="form-control" id="profile_picture" name="profile_picture"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update Profile Photo</button>
-                    </form>
-                </div>
+    <div class=" modal fade" id="changePhotoModal" tabindex="-1" aria-labelledby="changePhotoModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="changePhotoModalLabel">Change Profile Photo
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" enctype="multipart/form-data">
+                                                    <div class="mb-3">
+                                                        <label for="profile_picture" class="form-label">Select Profile
+                                                            Photo</label>
+                                                        <input type="file" class="form-control" id="profile_picture"
+                                                            name="profile_picture" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Update Profile
+                                                        Photo</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script>
-    <script src="assets/vendor/quill/quill.js"></script>
-    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
+            <!-- Vendor JS Files -->
+            <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/vendor/chart.js/chart.umd.js"></script>
+            <script src="assets/vendor/echarts/echarts.min.js"></script>
+            <script src="assets/vendor/quill/quill.js"></script>
+            <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+            <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+            <script src="assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+            <!-- Main JS File -->
+            <script src="assets/js/main.js"></script>
 </body>
 
 </html>

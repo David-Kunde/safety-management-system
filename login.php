@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Query the users table (removing 'id' since it's not needed)
-    $sql = "SELECT email, password, is_registered FROM users WHERE email = ?";
+    $sql = "SELECT email, password, is_registered, role FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -41,8 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Case 3: Email exists and user is registered
             if (password_verify($password, $row['password'])) {
                 $_SESSION['email'] = $row['email'];  
+                $_SESSION['role'] = $row['role'];
 
-                header("Location: staff-dashboard.php");
+                // Redirect based on role
+                if ($row['role'] == 'admin') {
+                    header("Location: admin-dashboard.php");
+                } elseif ($row['role'] == 'safety officer') {
+                    header("Location: safety-officer-dashboard.php");
+                } else {
+                    header("Location: staff-dashboard.php");
+                }
                 exit();
             } else {
                 $login_message = "<div class='alert alert-danger'>Incorrect password.</div>";
@@ -104,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.php" class="logo d-flex align-items-center w-auto">
                                     <img src="assets/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">Employee Login</span>
+                                    <span class="d-none d-lg-block">Login to your Account</span>
                                 </a>
                             </div><!-- End Logo -->
 
@@ -113,7 +121,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="card-body">
 
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                                         <p class="text-center small d-none">Enter your username & password to login</p>
                                     </div>
                                     <?php if (!empty($login_message)): ?>
@@ -124,12 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <form class="row g-3 needs-validation" method="POST" novalidate>
 
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Email or Staff ID</label>
+                                            <label for="yourUsername" class="form-label">Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="username" class="form-control"
                                                     id="yourUsername" required>
-                                                <div class="invalid-feedback">Please enter your email or Staff ID</div>
+                                                <div class="invalid-feedback">Please enter your Work email</div>
                                             </div>
                                         </div>
 

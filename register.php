@@ -76,8 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php endif; ?>
                         <form method="POST" action="" class="needs-validation" novalidate>
                             <div class="mb-3">
-                                <label for="yourEmail" class="form-label">Your Work Email</label>
-                                <input type="email" name="email" class="form-control" id="yourEmail" required>
+                                <label for="yourEmail" class="form-label">Email</label>
+                                <input type="email" placeholder="Enter your work email" name="email"
+                                    class="form-control" id="yourEmail" required>
                                 <div class="invalid-feedback">Please enter a valid email.</div>
                             </div>
                             <div class="mb-3">
